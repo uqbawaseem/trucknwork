@@ -88,6 +88,7 @@
             <h2 class="font-weight-light text-primary">Your Booked freights</h2>
           </div>
         </div>
+        <div class="row align-items-stretch">
         <?php   
         if(isset($_SESSION['email'])){
         $user_email = $_SESSION['email'];
@@ -95,10 +96,9 @@
         $query = "SELECT * FROM trip WHERE user_email = '$user_email'";
         $freight=mysqli_query($connection, $query);
         while($res = mysqli_fetch_array($freight)){
-
+          
         ?>
-        <div class="row align-items-stretch">
-          <div class="col-md-12 col-lg-12 mb-4 mb-lg-4">
+          <div class="col-md-6 col-lg-6 mb-4 mb-lg-4">
             <div class="unit-4 d-flex">
             <h6>Freight id: <?php echo $res['id'];?></h6>
               <div class="unit-4-icon mr-4"></div>
@@ -107,13 +107,13 @@
                 <h3>Email: <?php echo $res['user_phone'];?></h3>
                 <h3>Destination: <h3>
                 <p style= "color: darkslateblue;">&nbsp;&nbsp;&nbsp; From: -- <?php echo ucwords($res['originAddress'])." -- To -- ". ucwords($res['destinationAddress']);?></p>
-                <p>Bill: Rs/- <span style= "color: darkslateblue;"><?php echo $res['bill'];?></span> &nbsp;&nbsp; <span style="color: grey; font-size: 14px;"><?php echo $res['bill_status'];?></span></p>
+                <p>Bill: Rs/- <span style= "color: darkslateblue;"><?php echo $res['total_bill'];?></span> &nbsp;&nbsp; <span style="color: grey; font-size: 14px;"><?php echo $res['bill_status'];?></span></p>
               </div>
             </div>
           </div>
+          <hr>
+          <?php }}?>
         </div>
-        <hr>
-        <?php }}?>
       </div>
     </div>
 

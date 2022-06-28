@@ -5,6 +5,7 @@ session_start();?>
 <?php 
 include('_head.php');
 ?>
+
 <body>
 <?php 
     include('_navbar.php');
@@ -48,6 +49,7 @@ include('_head.php');
                         </div>";
                                                    
                         }
+
                 }
 ?>
             <h3>ADD NEW Admin</h3>
@@ -68,10 +70,14 @@ include('_head.php');
             </form>
         </div>
     </div>
+    
+    
+
     <!--======== SCRIPT FILES =========-->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/materialize.min.js"></script>
     <script src="js/custom.js"></script>
 </body>
+
 </html>

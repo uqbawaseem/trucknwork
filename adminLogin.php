@@ -18,7 +18,7 @@
            if (mysqli_fetch_assoc($result))
            {
              $_SESSION['name'] = $_POST['name'];
-             header('location:admin/index.php');
+             header('location:admin1/index.php');
            }
            else{
              echo "

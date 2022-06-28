@@ -20,10 +20,13 @@
             $user_phone = mysqli_real_escape_string($connection, $_POST['user_phone']);
             $originAddress = mysqli_real_escape_string($connection, $_POST['originAddress']);
             $destinationAddress = mysqli_real_escape_string($connection, $_POST['destinationAddress']);
+            $distance_covered = mysqli_real_escape_string($connection, $_POST['distance_covered']);
+            $fuel_expense = mysqli_real_escape_string($connection, $_POST['fuel_expense']);
+            $driver_expense = mysqli_real_escape_string($connection, $_POST['driver_expense']);
             $truck_id = mysqli_real_escape_string($connection, $_POST['truck_id']);
             $driver_id = mysqli_real_escape_string($connection, $_POST['driver_id']);
             if( empty($city) || empty($user_email) || empty($user_phone) || empty($user_id) || empty($originAddress) || empty($destinationAddress)|| empty($truck_id)||
-            empty($driver_id)){
+            empty($driver_id) || empty($distance_covered)){
                if( empty($city) ){
                      echo "<font color= 'red'>Name field is empty. </font>";
                }
@@ -42,24 +45,41 @@
                if( empty($destinationAddress) ){
                      echo "<font color= 'red'>destinationAddress field is empty. </font>";
                }
+               if( empty($distance_covered) ){
+                  echo "<font color= 'red'>distane field is empty. </font>";
+            }
                if( empty($truck_id) ){
                      echo "<font color= 'red'>Truck field is empty. </font>";
                }
                if( empty($driver_id) ){
                      echo "<font color= 'red'>Driver field is empty. </font>";
                }
-               
-               
             }
             else
                {
+                  if($distance_covered <= 20){
+                     $bill = 5000;
+                  }
+                  elseif($distance_covered <= 40){
+                     $bill = 10000;
+                  }
+                  elseif($distance_covered <= 70){
+                     $bill = 15000;
+                  }
+                  elseif($distance_covered <= 100){
+                     $bill = 20000;
+                  }
+                  else{
+                     $bill = 50000;
+                  }
                      mysqli_query($connection, "SET FOREIGN_KEY_CHECKS=0");
-                     $query = "INSERT INTO `trip`(`city`, `user_email`, `originAddress`, `destinationAddress`, `truck_id`, `driver_id`, `user_id`, `user_phone`) VALUES ('$city','$user_email','$originAddress','$destinationAddress','$truck_id','$driver_id','$user_id','$user_phone')";
+                     $total_bill = $bill+$fuel_expense+$driver_expense;
+                     $query = "INSERT INTO `trip`(`city`, `user_email`, `originAddress`, `destinationAddress`, `distance_covered`, `truck_id`, `driver_id`, `user_id`, `user_phone`, `bill`, `total_bill`) VALUES ('$city','$user_email','$originAddress','$destinationAddress','$distance_covered','$truck_id','$driver_id','$user_id', '$user_phone', '$bill', '$total_bill')";
                      $result  = mysqli_query($connection, $query) or die ("ERROR");
                   
                      mysqli_query($connection, "SET FOREIGN_KEY_CHECKS=1");
                      mysqli_close($connection);
-
+                     header('location:index.php');
                      echo "<div class=\"uk-alert-primary\" uk-alert>
             <a class=\"uk-alert-close\" uk-close></a>
             <p>Trip Book successfully!</p>
@@ -69,17 +89,20 @@
 
          }
 ?>
-      <?php   
-             $session_email = $_SESSION['email'];
-             $query = "SELECT * from `user` WHERE email ='$session_email'";
-             $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-             while($a = mysqli_fetch_array($result)){
+      <?php  
+          if ($_SESSION['email']){
+            $session_email = $_SESSION['email'];
+            $query = "SELECT * from `user` WHERE email ='$session_email'";
+            $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+            while($a = mysqli_fetch_array($result)){
       ?> 
       <div class="container mt-5">
          <h3 style="text-align: center;"> BOOK A TRUCK</h3>
          <form action="bookAtruck.php" method="POST" name="form2" enctype="multipart/form-data">
             <div class="col mt-3">
                <input type="hidden" name="user_id" class="form-control input-lg" value="<?php echo $a['id'];?>">
+               <input type="hidden" name="fuel_expense" class="form-control input-lg" value="2000">
+               <input type="hidden" name="driver_expense" class="form-control input-lg" value="1000">
                <input type="text" class="form-control" name="city" placeholder="City">
             </div><br>
             <div class="col">
@@ -91,7 +114,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="user_phone" placeholder="Phone Number" value="<?php echo $a['phone'];?>">
                 </div>
-                <?php } ?>
+                <?php }} ?>
             </div>
             <div class="col">
                <div class="form-group">
@@ -101,6 +124,11 @@
             <div class="col">
                <div class="form-group">
                   <input type="text" class="form-control" name="destinationAddress" placeholder="Destination Address">
+               </div>
+            </div>
+            <div class="col">
+               <div class="form-group">
+                  <input type="number" class="form-control" name="distance_covered" placeholder="Distance In KM">
                </div>
             </div>
             <div class="col">

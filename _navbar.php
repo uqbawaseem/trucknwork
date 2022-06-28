@@ -28,7 +28,7 @@
                       echo "<li class=\"has-children\">
                       <a href=\"#\" class=\"dropdown-toggle text-uppercase\" data-toggle=\"dropdown\" style=\"color: yellow;\">" .$_SESSION['name']."</a>
                         <ul class=\"dropdown\">
-                          <li><a href=\"admin/index.php\">Dashbourd</a></li>
+                          <li><a href=\"admin1/index.php\">Dashbourd</a></li>
                           <li><a href=\"adminLogout.php?logout\">Logout</a></li>
                         </ul>";
                       }

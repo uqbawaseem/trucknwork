@@ -30,17 +30,14 @@
                                 <ul>
                                     <li><a href="all_trucks.php">All Trucks</a>
                                     </li>
-                                    <li><a href="new_truck.php">Add New Truck</a>
-                                    </li>
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-h-square" aria-hidden="true"></i>Drivers</a>
+                        
+                        <li><a href="javascript:void(0)" class="collapsible-header"><i class="fa fa-umbrella" aria-hidden="true"></i>Drivers</a>
                             <div class="collapsible-body left-sub-menu">
                                 <ul>
-                                    <li><a href="all_driver.php">All Drivers</a>
-                                    </li>
-                                    <li><a href="new_driver.php">Add New Driver</a>
+                                    <li><a href="all_drivers.php">All Drivers</a>
                                     </li>
                                 </ul>
                             </div>
@@ -52,6 +49,8 @@
                                     </li>
                                 </ul>
                             </div>
+                        </li>
+                        <li><a href="login.php" target="_blank"><i class="fa fa-sign-in" aria-hidden="true"></i> Logout</a>
                         </li>
                         <li><a href="../index.php"><i class="fa fa-sign-in" aria-hidden="true"></i> Back to Website</a>
                         </li>
