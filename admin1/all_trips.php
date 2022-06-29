@@ -55,7 +55,7 @@
                             echo "<td>".$p['total_bill']."</td>";
                             echo "<td>".$p['bill_status']."</td>";
                             
-                            echo "<td><a href=\"edit_trip.php?id=$p[id]\" class= \"btn btn-secondary\"><i class=\"fa fa-edit\"></i></a> <br><br> <a href=\"delete_trip.php?id=$p[id]\"  class= \"btn btn-danger\" onClick=\"return confirm('Are you sure you want to delete?')\"><i class=\"fa fa-trash\" style=\"color:red;\"></i></a></td>";		         
+                            echo "<td><a href=\"report.php?id=$p[id]\" class= \"btn btn-secondary\"><i class=\"fa fa-file\"></i></a> <br><br><a href=\"edit_trip.php?id=$p[id]\" class= \"btn btn-secondary\"><i class=\"fa fa-edit\"></i></a> <br><br> <a href=\"delete_trip.php?id=$p[id]\"  class= \"btn btn-danger\" onClick=\"return confirm('Are you sure you want to delete?')\"><i class=\"fa fa-trash\" style=\"color:red;\"></i></a></td>";		         
                          }
                         ?>
                </tbody>
