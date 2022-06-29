@@ -24,9 +24,10 @@ include('_head.php');
                 if(isset($_POST['submit'])) {
                     $name = mysqli_real_escape_string($connection, $_POST['name']);
                     $email = mysqli_real_escape_string($connection, $_POST['email']);
+                    $phone = mysqli_real_escape_string($connection, $_POST['phone']);
                     $password = mysqli_real_escape_string($connection, $_POST['password']);
                     
-                    if( empty($name) || empty($email) || empty($password)){
+                    if( empty($name) || empty($email) || empty($password) || empty($phone)){
                         if( empty($name) ){
                             echo "<font color= 'red'>Name field is empty. </font>";
                         }
@@ -37,23 +38,27 @@ include('_head.php');
                             echo "<font color= 'red'>Password field is empty. </font>";
                         }
                         
+                        if( empty($phone) ){
+                            echo "<font color= 'red'>Password field is empty. </font>";
+                        }
+                        
                     }
                     else
                         {
-                            $query = "INSERT INTO `admin`(`name`, `email`, `password`) VALUES ('$name','$email','$password')";
+                            $query = "INSERT INTO `driver`(`name`, `email`, `phone`, `password`) VALUES ('$name','$email','$phone','$password')";
                             $result  = mysqli_query($connection, $query);
 
                             echo "<div class=\"uk-alert-primary\" uk-alert>
-                                    <a class=\"uk-alert-close\" uk-close></a>
-                                    <p>Admin added successfully!</p>
-                                </div>";
+                            <a class=\"uk-alert-close\" uk-close></a>
+                            <p>Driver added successfully!</p>
+                        </div>";
                                                    
                         }
 
                 }
 ?>
-            <h3>ADD NEW Admin</h3>
-            <form class="mt-4" action="add-admin.php" method="post">
+            <h3>ADD NEW DRIVER</h3>
+            <form class="mt-4" action="add_driver.php" method="post">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" name="name">
@@ -61,6 +66,10 @@ include('_head.php');
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Phone</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone" name="phone">
                 </div>  
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>

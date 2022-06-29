@@ -20,35 +20,32 @@
             <!-- side bar end -->
          </div>
          <div class="col-md-9" style="margin-top: 160px;">
-            <div class="uk-alert-primary" uk-alert>
-               <a class="uk-alert-close" uk-close></a>
-               <p>Login successfully! </p>
-            </div>
-            <a href="add-admin.php">
-            <button type="button" class="btn btn-dark float-right mr-5 mb-4">
-            ADD NEW ADMIN
-            </button> 
+            <a href="add_truck.php">
+               <button type="button" class="btn btn-dark float-right mr-5 mb-4">
+               ADD NEW TRUCK
+               </button> 
             </a>
             <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                <thead class="bg-dark text-light">
                   <tr>
                      <th scope="col">ID</th>
-                     <th scope="col">NAME</th>
-                     <th scope="col">Email</th>
-                     <th scope="col">PASSOWRD</th>
+                     <th scope="col">Company Name</th>
+                     <th scope="col">Name Plate</th>
+                     <th scope="col">Model</th>
                      <th scope="col">ACTIONS</th>
                   </tr>
                </thead>
                <tbody>
                   <?php 
-                     $result = mysqli_query($connection, "SELECT * FROM admin ORDER BY `id` DESC");
+                     $result = mysqli_query($connection, "SELECT * FROM truck ORDER BY `id` DESC");
                      
                         while($p = mysqli_fetch_array($result)){
                             echo "<tr><td>".$p['id']."</td>";
-                            echo "<td>".$p['name']."</td>";
-                            echo "<td>".$p['email']."</td>";
-                            echo "<td>".$p['password']."</td>";
-                            echo "<td><a href=\"edit-admin.php?id=$p[id]\" class= \"btn btn-secondary\"><i class=\"fa fa-edit\"></i></a> <br><br> <a href=\"admin-delete.php?id=$p[id]\"  class= \"btn btn-danger\" onClick=\"return confirm('Are you sure you want to delete?')\"><i class=\"fa fa-trash\" style=\"color:red;\"></i></a></td>";		         
+                            echo "<td>".$p['company_name']."</td>";
+                            echo "<td>".$p['name_plate']."</td>";
+                            echo "<td>".$p['model']."</td>";
+                            
+                            echo "<td><a href=\"delete_truck.php?id=$p[id]\"  class= \"btn btn-danger\" onClick=\"return confirm('Are you sure you want to delete?')\"><i class=\"fa fa-trash\" style=\"color:red;\"></i></a></td>";		         
                          }
                         ?>
                </tbody>
